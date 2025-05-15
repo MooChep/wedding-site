@@ -1,11 +1,15 @@
 <?php
 include("includes/header.php") 
 ?>
-<ul>
-    <li>14h00</li>
-    <li>17h00</li>
-    <li>21h00</li>
-</ul>
+<section class="timeline">
+    <ul>
+      <li>11h00 Cérémonie civile</li>
+      <li>13h00 Cocktail & apéritif</li>
+      <li>15h00 Cérémonie laïque</li>
+      <li>17h00 Photos & jeux</li>
+      <li>20h00 Dîner & soirée dansante</li>
+    </ul>
+  </section>
 <?php
 include("includes/footer.php") 
 ?>
