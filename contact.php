@@ -64,6 +64,28 @@ $stmt->bind_param("ssisss", $nom, $prenom, $nb_personnes, $presence, $musique, $
     }
 }
 ?>
+<script>
+document.querySelector("form").addEventListener("submit", function(e) {
+    const prenom = document.querySelector('[name="prenom"]');
+    const nom = document.querySelector('[name="nom"]');
+    const nbPersonnes = document.querySelector('[name="nb_personnes"]');
+    const presence = document.querySelectorAll('[name="presence"]:checked');
+
+    if (!prenom.value.trim() || !nom.value.trim() || !nbPersonnes.value.trim()) {
+        alert("Merci de remplir tous les champs obligatoires !");
+        e.preventDefault(); // Empêche l'envoi
+        return;
+    }
+
+    if (presence.length === 0) {
+        alert("Merci d'indiquer votre présence !");
+        e.preventDefault();
+        return;
+    }
+
+    // Tu peux ajouter ici d'autres vérifs si besoin
+});
+</script>
 
 
 <?php
