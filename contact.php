@@ -9,17 +9,22 @@
 </form>
 
 <?php
-include('includes/db.php');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $stmt = $pdo->prepare('INSERT INTO contact (nom, prenom, email) VALUES (?, ?, ?)');
-    $stmt->execute([
-        $_POST['nom'],
-        $_POST['email'],
-        $_POST['message']
-    ]);
-    echo "<p>Message enregistré !</p>";
+$conn = new mysqli('localhost', 'root', '', 'wedding_db');
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+include('includes/db.php');
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    
+    $stmt = $conn->prepare("INSERT INTO contact_requests (name, email, message) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $name, $email, $message);
+    $stmt->execute();
+}
+
 ?>
 
 <?php include('includes/footer.php'); ?>
