@@ -1,6 +1,6 @@
-<hr>
-<footer>
-    <p>&copy; <?php echo date("Y"); ?> - Mon site</p>
-</footer>
+<footer class="text-center mt-5">
+        <hr>
+        <p>&copy; <?= date("Y"); ?> - Mon site</p>
+    </footer>
 </body>
 </html>

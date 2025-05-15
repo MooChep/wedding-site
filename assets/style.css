@@ -2,10 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Quicksand:wght@500&display=swap');
 
 body {
-    font-family: Yeseva One,sans-serif;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #fcfff9;
 }
+
+nav, h2{
+    font-family: Yeseva One,sans-serif;
+}
+
+
 nav a {
     margin-right: 10px;
 }
