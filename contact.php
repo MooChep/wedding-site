@@ -12,25 +12,22 @@
     <label>Nom :</label>
     <input type="text" name="nom" placeholder="Sanchez" required>
 
-    <label>Nombre de personnes :</label>
-    <input type="number" name="nb_personnes" min="1" placeholder="Combien que vous êtes ?" required>
-
-    <label>Votre présence :</label>
-    <select name="presence" required>
-        <option value="" disabled selected>Choisissez une option</option>
-        <option value="0">Malheureusement, non</option>
-        <option value="1">Seulement au vin d'honneur</option>
-        <option value="2">Seulement au repas</option>
-        <option value="3">Tout le samedi</option>
-        <option value="4">Samedi et dimanche</option>
-    </select>
-
-    <label>Musique pour danser :</label>
-    <input type="text" name="musique" placeholder="Exemple: Allumer le feu">
-
     <label>Accompagnants :</label>
 <div id="accompagnants-container"></div>
 <button type="button" onclick="ajouterAccompagnant()">+ Ajouter un accompagnant</button><br><br>
+
+     <label>Quand serez-vous parmi nous ?</label>
+    <select name="presence" required>
+        <option value="" disabled selected>Choisissez une option</option>
+        <option value="4">Tout le samedi</option>
+        <option value="5">Samedi et dimanche</option>
+        <option value="2">Seulement au vin d'honneur</option>
+        <option value="3">Seulement au repas</option>
+        <option value="1">Impossible d'être parmi vous</option>
+    </select>    
+
+    <label>Musique pour danser :</label>
+    <input type="text" name="musique" placeholder="Exemple: Allumer le feu">
 
 
     <button type="submit">Envoyer</button>
@@ -60,7 +57,6 @@ function ajouterAccompagnant() {
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
-    $nb_personnes = intval($_POST['nb_personnes']);
     $presence = intval($_POST['presence']);
     $musique = $_POST['musique'] ?? null;
 
