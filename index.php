@@ -9,6 +9,13 @@ $request = trim($request, '/'); // ex: "contact", "deroule", ""
 
 // Routes disponibles + tests d'existence
 $page = $request ?: 'home';
+$allowed_pages = ['home', 'contact', 'deroule', 'faq'];
+if (!in_array($page, $allowed_pages)) {
+    http_response_code(404);
+    include('404.php');
+    exit;
+}
+
 $file = "$page.php";
 
 if (file_exists($file)) {

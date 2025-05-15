@@ -1,8 +1,9 @@
 <?php
 require_once("includes/db.php"); // adapte le chemin si nécessaire
 ?>
-
-<?php include_once('includes/header.php'); ?>
+<?php
+include("includes/header.php") 
+?>
 <h1>Contact</h1>
 <form method="POST" action="contact.php">
     <input type="text" name="nom" placeholder="Votre nom" required>
@@ -14,15 +15,23 @@ require_once("includes/db.php"); // adapte le chemin si nécessaire
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
     $email = $_POST['email'];
     $message = $_POST['message'];
     
-    $stmt = $conn->prepare("INSERT INTO contact_requests (name, email, message) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $email, $message);
-    $stmt->execute();
+    
+    $stmt = $conn->prepare("INSERT INTO contact_requests (nom, prenom, email, message) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $nom, $prenom, $email, $message);
+    if ($stmt->execute()) {
+        echo "Message envoyé avec succès !";
+    } else {
+        echo "Erreur : " . $stmt->error;
+    }
 }
 
 ?>
 
-<?php include_once('includes/footer.php'); ?>
+<?php
+include("includes/footer.php") 
+?>
