@@ -10,14 +10,16 @@ include("includes/header.php")
          formulaire resteront privées et seront visionnée uniquement par Camille et Ilan</p>
     <form method="POST" action="contact.php" >
       <label>Prénom :</label>
-      <input type="text" name="prenom" placeholder="Anna" required>
+      <input type="text" name="prenom" placeholder="Camille" required>
 
       <label>Nom :</label>
-      <input type="text" name="nom" placeholder="Le caca"required>
+      <input type="text" name="nom" placeholder="Sanchez" required>
 
       <label>Nombre de personnes :</label>
       <input type="number" name="nb_personnes" min="1" placeholder="Combien que vous êtes ?" required>
-    <!--  Pour pouvoir ajouter les infos sur chaque participants-->
+
+      <label>Nom des accompagnants :</label>
+      <input type="text" name="accompagnants" placeholder= "Identité de vos +1">
       <!-- surveymonkey inspi -->
       <label>Serez-vous présent ?</label>
       <input type="checkbox" id="vin" name="presence" value="vin">
@@ -32,7 +34,7 @@ include("includes/header.php")
       <label for="non">Malheureusement, non !</label><br>
 
       <label>Titre et auteur de la musique qui vous fait danser jusqu'au bout de la nuit :</label>
-      <input type="text" name="musique" placeholder="Exemple: La bite à dudule">
+      <input type="text" name="musique" placeholder="Exemple: Allumer le feu">
 
       <label>Si vous souhaitez participer à l'organisation du mariage (animations, discours...), n'hésitez pas à nous le faire savoir !</Label>
       <input type="text" name="participation" placeholder="Bah oui bien sur j'adorerais organiser un jeu sur le caca">
