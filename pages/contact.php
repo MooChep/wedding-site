@@ -8,8 +8,16 @@
 </form>
 
 <?php
+include('includes/db.php');
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo "<p>Merci " . htmlspecialchars($_POST['nom']) . ", votre message a été envoyé.</p>";
+    $stmt = $pdo->prepare('INSERT INTO messages (nom, email, message) VALUES (?, ?, ?)');
+    $stmt->execute([
+        $_POST['nom'],
+        $_POST['email'],
+        $_POST['message']
+    ]);
+    echo "<p>Message enregistré !</p>";
 }
 ?>
 
