@@ -1,4 +1,8 @@
-<?php include('includes/header.php'); ?>
+<?php
+require_once("includes/db.php"); // adapte le chemin si nécessaire
+?>
+
+<?php include_once('includes/header.php'); ?>
 <h1>Contact</h1>
 <form method="POST" action="contact.php">
     <input type="text" name="nom" placeholder="Votre nom" required>
@@ -9,12 +13,6 @@
 </form>
 
 <?php
-$conn = new mysqli('localhost', 'root', '', 'wedding_db');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-include('includes/db.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -27,4 +25,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
-<?php include('includes/footer.php'); ?>
+<?php include_once('includes/footer.php'); ?>

@@ -1,32 +1,22 @@
 <?php
 // header toujours en haut
-include('includes/header.php');
+include_once('includes/header.php');
 
 // Récupération de la route propre depuis l’URL
 $request = $_SERVER['REQUEST_URI'];
 $request = parse_url($request, PHP_URL_PATH);
 $request = trim($request, '/'); // ex: "contact", "deroule", ""
 
-// Routes disponibles
-switch ($request) {
-    case '':
-    case 'home':
-        include('home.php');
-        break;
+// Routes disponibles + tests d'existence
+$page = $request ?: 'home';
+$file = "$page.php";
 
-    case 'contact':
-        include('contact.php');
-        break;
-
-    case 'deroule':
-        include('deroule.php');
-        break;
-
-    default:
-        http_response_code(404);
-        include('404.php');
+if (file_exists($file)) {
+    include($file);
+} else {
+    http_response_code(404);
+    include('404.php');
 }
-
 // footer toujours en bas
-include('includes/footer.php');
+include_once('includes/footer.php');
 ?>

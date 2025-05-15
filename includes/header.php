@@ -7,8 +7,9 @@
 </head>
 <body>
 <nav>
-    <a href="index.php">Accueil</a>
-    <a href="deroule.php">Déroulé</a>
-    <a href="contact.php">RSVP</a>
+    <a href="index">Accueil</a>
+    <a href="deroule">Déroulé</a>
+    <a href="contact">RSVP</a>
+    <a href="faq">FAQ</a>
 </nav>
 <hr>
