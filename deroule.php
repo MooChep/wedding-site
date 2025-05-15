@@ -2,7 +2,7 @@
 include("includes/header.php") 
 ?>
 <section class="timeline">
-    <ul>
+    <ul class="px-4 pt-5 my-5 text-center border-bottom">
       <li>11h00 Cérémonie civile</li>
       <li>13h00 Cocktail & apéritif</li>
       <li>15h00 Cérémonie laïque</li>
