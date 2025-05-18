@@ -1,16 +1,77 @@
-<?php
-include("includes/header.php") 
-?>
-<section class="timeline">
-  <h1>Déroulé de la journée !</h1>
-    <ul class="px-4 pt-5 my-5 text-center border-bottom">
-      <li>11h00 Cérémonie civile</li>
-      <li>13h00 Cocktail & apéritif</li>
-      <li>15h00 Cérémonie laïque</li>
-      <li>17h00 Photos & jeux</li>
-      <li>20h00 Dîner & soirée dansante</li>
-    </ul>
-  </section>
-<?php
-include("includes/footer.php") 
-?>
+<?php include("includes/header.php") ?>
+
+<section class="timeline container py-5 text-center">
+  <h1 class="text-danger mb-5">Le programme du week-end !</h1>
+
+  <!-- Vendredi -->
+  <div class="day mb-5">
+    <h2 class="text-uppercase mb-4">Vendredi 18 septembre</h2>
+    <div class="event mb-3">
+      <i class="bi bi-ring fs-4 text-danger"></i><br>
+      <strong>14h30 | Cérémonie</strong>
+      <p>On officialise tout ça avec amour 💍</p>
+    </div>
+    <div class="event mb-3">
+      <i class="bi bi-cup-straw fs-4 text-danger"></i><br>
+      <strong>16h00 | Apéro</strong>
+      <p>On trinque à l’amour avec un verre à la main 🍹</p>
+    </div>
+    <div class="event mb-3">
+      <i class="bi bi-egg-fried fs-4 text-danger"></i><br>
+      <strong>18h00 | Dîner</strong>
+      <p>À table tout le monde ! Bon app’ et bonne ambiance 🍽️</p>
+    </div>
+    <div class="event">
+      <i class="bi bi-boombox fs-4 text-danger"></i><br>
+      <strong>21h00 | Soirée dansante</strong>
+      <p>On enflamme la piste... Fiesta Boum Boum 🕺💃</p>
+    </div>
+  </div>
+
+  <!-- Samedi -->
+  <div class="day mb-5">
+    <h2 class="text-uppercase mb-4">Samedi 19 septembre</h2>
+    <div class="event mb-3">
+      <i class="bi bi-heart-pulse fs-4 text-danger"></i><br>
+      <strong>14h30 | Cérémonie cool</strong>
+      <p>On remet ça avec le smile 😄</p>
+    </div>
+    <div class="event mb-3">
+      <i class="bi bi-cup-straw fs-4 text-danger"></i><br>
+      <strong>16h00 | Apéro chill</strong>
+      <p>Un petit verre, une photo, une vibe ☀️📸</p>
+    </div>
+    <div class="event mb-3">
+      <i class="bi bi-egg-fried fs-4 text-danger"></i><br>
+      <strong>18h00 | À table bis</strong>
+      <p>Encore un festin... bah oui, c’est la fête ! 🍴</p>
+    </div>
+    <div class="event">
+      <i class="bi bi-speaker fs-4 text-danger"></i><br>
+      <strong>21h00 | La soirée continue</strong>
+      <p>On ne s’arrête plus, jusqu’au bout de la night 🔥</p>
+    </div>
+  </div>
+
+  <!-- Dimanche -->
+  <div class="day">
+    <h2 class="text-uppercase mb-4">Dimanche 20 septembre</h2>
+    <div class="event mb-3">
+      <i class="bi bi-alarm fs-4 text-danger"></i><br>
+      <strong>12h00 | Réveil</strong>
+      <p>Un café et c’est reparti... doucement ☕</p>
+    </div>
+    <div class="event mb-3">
+      <i class="bi bi-cup-hot fs-4 text-danger"></i><br>
+      <strong>13h30 | Brunch</strong>
+      <p>Un bon brunch à partager, en mode doudou 🧸🥐</p>
+    </div>
+    <div class="event">
+      <i class="bi bi-door-open fs-4 text-danger"></i><br>
+      <strong>18h00 | Ciao</strong>
+      <p>On se quitte avec le cœur rempli de souvenirs ❤️</p>
+    </div>
+  </div>
+</section>
+
+<?php include("includes/footer.php") ?>

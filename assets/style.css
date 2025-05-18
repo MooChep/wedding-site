@@ -6,8 +6,12 @@ body {
     background-color: #fcfff9;
 }
 
-nav, h1, h2{
+nav, h1, h2, #deroule{
     font-family: Yeseva One,sans-serif;
+}
+
+#deroule>li {
+    font-size: 1.2em;
 }
 
 #imgNous, #imgDomaine {
