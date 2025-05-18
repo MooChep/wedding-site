@@ -1,0 +1,17 @@
+{
+    "name": "ilanh/wedding",
+    "autoload": {
+        "psr-4": {
+            "Ilanh\\Wedding\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MooChep",
+            "email": "ilan.heas@supdevinci-edu.fr"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.21"
+    }
+}
