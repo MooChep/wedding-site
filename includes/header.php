@@ -12,8 +12,8 @@
 <div class="container py-5 " style="max-width: 60vw">
     <nav class="class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"">
         <div class='nav nav-pills' style='margin-bottom: 2em'>
-            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" href="#">O</a>
-            <a class="nav-link active " href="home">Accueil</a>
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" href="#"><img src="../assets/facebook.png" alt="logo"></a>
+            <a class="nav-link " href="home">Accueil</a>
             <a class="nav-link" href="deroule">Déroulé</a>
             <a class="nav-link" href="contact">RSVP</a>
             <a class="nav-link" href="faq">FAQ</a>

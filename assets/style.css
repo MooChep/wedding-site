@@ -6,11 +6,13 @@ body {
     background-color: #fcfff9;
 }
 
-nav, h2{
+nav, h1, h2{
     font-family: Yeseva One,sans-serif;
 }
 
-
+#imgNous, #imgDomaine {
+  width: 20vw;
+}
 nav a {
     margin-right: 10px;
 }

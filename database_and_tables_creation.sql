@@ -1,22 +1,40 @@
 
 CREATE DATABASE IF NOT EXISTS wedding_db;
 USE wedding_db;
-DROP TABLE contact_requests;
-CREATE TABLE contact_requests (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL,
-    prenom VARCHAR(100) NOT NULL,
-    nb_personnes INT,
-    presence VARCHAR(255) NOT NULL,
-    musique TEXT NOT NULL,
-    participation TEXT NOT NULL,
-    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS `personne` (
+  `id_personne` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(100) NOT NULL,
+  `prenom` VARCHAR(100) NOT NULL,
+  `id_presence` INT NOT NULL,
+  `id_rsvp` INT NOT NULL
 );
 
-
-
-CREATE TABLE IF NOT EXISTS faq (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    question TEXT,
-    answer TEXT
+CREATE TABLE IF NOT EXISTS `musique` (
+  `id_musique` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(100) NOT NULL,
+  `id_personne` VARCHAR(100) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS `RSVP` (
+  `id_rsvp` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `date_rsvp` timestamp
+);
+
+CREATE TABLE IF NOT EXISTS `presence` (
+  `id_presence` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `desc` VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS `faq` (
+  `id_faq` INT PRIMARY KEY AUTO_INCREMENT,
+  `nom` VARCHAR(100),
+  `prenom` VARCHAR(100),
+  `email` VARCHAR(60) NOT NULL,
+  `question` TEXT NOT NULL
+);
+
+ALTER TABLE `musique` ADD FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`);
+
+ALTER TABLE `personne` ADD FOREIGN KEY (`id_presence`) REFERENCES `presence` (`id_presence`);
+
+ALTER TABLE `personne` ADD FOREIGN KEY (`id_rsvp`) REFERENCES `RSVP` (`id_rsvp`);
