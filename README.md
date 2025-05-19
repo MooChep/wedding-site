@@ -1,20 +1,18 @@
 ## Suivi des taches à faire
 
-- [ ] Concevoir la page RSVP/contact avec formulaire
+- [x] Concevoir la page RSVP/contact avec formulaire
 
 - [ ] Intégrer une page FAQ dynamique
 
-- [ ] Installer et configurer la base de données
+- [x] Installer et configurer la base de données
 
-- [ ] Écrire les modèles pour l’accès aux données
+- [x] Écrire les modèles pour l’accès aux données
 
-- [ ] Gérer la soumission des formulaires et validation côté serveur
-
-- [ ] Implémenter l’envoi de mails de confirmation
+- [x] Gérer la soumission des formulaires et validation côté serveur
 
 - [ ] Ajouter la gestion des sessions (connexion admin par exemple)
 
-- [ ] Créer une interface d’administration simple
+- [x] Créer une interface d’administration simple
 
 - [ ] Intégrer les styles CSS et framework (Bootstrap)
 
@@ -52,13 +50,7 @@
 
 - [ ] Mettre en place un système de backup de la base de données
 
-- [ ] Former un éventuel administrateur ou utilisateur
-
 - [ ] Rédiger un manuel utilisateur simplifié
-
-- [ ] Mettre en place un système de newsletter (optionnel)
-
-- [ ] Gérer les conditions générales / mentions légales
 
 - [ ] Installer un certificat SSL (HTTPS)
 
