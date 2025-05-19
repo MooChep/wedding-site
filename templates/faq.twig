@@ -1,29 +1,17 @@
 {% extends 'layout.twig' %}
 
-{% block title %}FAQ{% endblock %}
-
 {% block content %}
+<h1>Questions fréquentes</h1>
 
-<h1>Réponses aux questions :</h1>
-
-<?php
-// Requête vers la table FAQ
-$result = $conn->query("SELECT * FROM faq");
-
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<div>";
-        echo "<h3>" . htmlspecialchars($row['question']) . "</h3>";
-        echo "<p>" . nl2br(htmlspecialchars($row['answer'])) . "</p>";
-        echo "</div>";
-    }
-} else {
-    echo "<p>Aucune question disponible pour le moment.</p>";
-}
-?>
-
-<?php include_once("includes/footer.php"); ?>
-
-
-
+{% if questions is not empty %}
+    <ul class="faq-list">
+        {% for q in questions %}
+            <li>
+                <strong>{{ q.nom }}</strong> : {{ q.question }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucune question pour le moment.</p>
+{% endif %}
 {% endblock %}

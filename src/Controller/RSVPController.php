@@ -28,14 +28,14 @@ class RSVPController
         $this->musiqueModel = new Musique();
     }
 
-public function index()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $this->submitForm($_POST);
-    } else {
-        $this->showForm();
+    public function index()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->submitForm($_POST);
+        } else {
+            $this->showForm();
+        }
     }
-}
 
 
     // Affichage du formulaire RSVP

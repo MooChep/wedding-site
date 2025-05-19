@@ -1,0 +1,21 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<h1>Modération FAQ</h1>
+
+{% if questions %}
+    <ul class="admin-faq-list">
+        {% for q in questions %}
+            <li>
+                <strong>{{ q.nom }}</strong> ({{ q.email }})<br>
+                {{ q.question }}
+                <form method="POST" action="/admin/faq/validate/{{ q.id }}">
+                    <button type="submit">Valider</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucune question en attente.</p>
+{% endif %}
+{% endblock %}

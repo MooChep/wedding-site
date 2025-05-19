@@ -7,6 +7,7 @@ use App\Model\Personne;
 use PDO;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use App\Model\FAQ;
 
 class AdminController
 {
@@ -25,11 +26,31 @@ class AdminController
     public function index(): void
     {
         $pdo = Database::getConnection();
-        $personneModel = new Personne($pdo); // ← IMPORTANT
+        $personneModel = new Personne(pdo: $pdo); // ← IMPORTANT
         $personnes = $personneModel->getAllWithDetails();
 
-        echo $this->twig->render('admin.twig', [
+        echo $this->twig->render(name: 'admin/admin.twig', context: [
             'personnes' => $personnes
         ]);
+    }
+
+    public function showFAQModeration(): void
+    {
+        $faqModel = new FAQ();
+        $pending = $faqModel->getPendingQuestions();
+
+        echo $this->twig->render(name: 'admin/faq_admin.twig', context: [
+            'questions' => $pending,
+            'title' => 'Modération FAQ'
+        ]);
+    }
+
+    public function validateFAQ($id): never
+    {
+        $faqModel = new FAQ();
+        $faqModel->setVisible(id: $id, visible: true);
+
+        header(header: 'Location: /admin/faq');
+        exit;
     }
 }

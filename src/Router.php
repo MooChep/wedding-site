@@ -5,6 +5,7 @@ namespace App;
 use App\Controller\HomeController;
 use App\Controller\RSVPController;
 use App\Controller\DerouleController;
+use App\Controller\FAQController;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -19,53 +20,70 @@ class Router
     }
 
     public function handleRequest(string $uri)
-    {
-        $method = $_SERVER['REQUEST_METHOD'];
+{
+    $method = $_SERVER['REQUEST_METHOD'];
 
-        // Détecte le sous-dossier si tu es dans /wedding
-        $basePath = '/wedding';
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $basePath = '/wedding';
+    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-        if (strpos($uri, $basePath) === 0) {
-            $uri = substr($uri, strlen($basePath));
-        }
-
-        $uri = trim($uri, '/');
-
-        switch ($uri) {
-            case '':
-            case 'home':
-                $controller = new HomeController();
-                $controller->index();
-                break;
-
-            case 'rsvp':
-                $controller = new RSVPController();
-                $controller->index($method);
-                break;
-
-            case 'rsvp/submit':
-                $controller = new RSVPController();
-                $controller->submitForm($method);
-                break;
-
-            case 'deroule':
-                $controller = new DerouleController();
-                $controller->index();
-                break;
-
-            case 'admin':
-                $controller = new \App\Controller\AdminController();
-                $controller->index();
-                break;
-            
-            default:
-                http_response_code(404);
-                echo $this->twig->render('404.twig', [
-                    'title' => 'Page introuvable',
-                    'message' => "La page « $uri » n'existe pas."
-                ]);
-                break;
-        }
+    if (strpos($uri, $basePath) === 0) {
+        $uri = substr($uri, strlen($basePath));
     }
+
+    $uri = trim(string: $uri, characters: '/');
+
+    switch ($uri) {
+        case '':
+        case 'home':
+            $controller = new HomeController();
+            $controller->index();
+            break;
+
+        case 'rsvp':
+            $controller = new RSVPController();
+            
+            if ($method == 'POST') {
+                $controller->submitForm(postData: $_POST);
+            } else {
+                $controller->index();
+            }
+            break;
+
+        case 'deroule':
+            $controller = new DerouleController();
+            $controller->index();
+            break;
+
+        case 'faq':
+            $controller = new FAQController();
+            $controller->index();
+            break;
+
+        case 'admin':
+            $controller = new \App\Controller\AdminController();
+            $controller->index();
+            break;
+
+        case 'admin/faq':
+            $controller = new \App\Controller\AdminController();
+            $controller->showFAQModeration();
+            break;
+
+        default:
+            // // Validation question FAQ : admin/faq/validate/ID (en POST)
+            // if ($method === 'POST' && preg_match('#^admin/faq/validate/(\d+)$#', $uri, $matches)) {
+            //     $controller = new \App\Controller\AdminController();
+            //     $controller->validateFAQ($matches[1]);
+            //     break;
+            // }
+
+            http_response_code(404);
+            echo $this->twig->render('404.twig', [
+                'title' => 'Page introuvable',
+                'message' => "La page « $uri » n'existe pas."
+            ]);
+            break;
+    }
+}
+
 }
