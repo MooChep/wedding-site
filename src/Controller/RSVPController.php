@@ -5,6 +5,7 @@ use App\Model\Personne;
 use App\Model\RSVP;
 use App\Model\Presence;
 use App\Model\Musique;
+use App\Database;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -21,16 +22,21 @@ class RSVPController
         $loader = new FilesystemLoader(__DIR__ . '/../../templates');
         $this->twig = new Environment($loader);
 
-        $this->personneModel = new Personne();
+        $this->personneModel = new Personne(Database::getConnection());
         $this->rsvpModel = new RSVP();
         $this->presenceModel = new Presence();
         $this->musiqueModel = new Musique();
     }
 
-    public function index()
-    {
+public function index()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $this->submitForm($_POST);
+    } else {
         $this->showForm();
     }
+}
+
 
     // Affichage du formulaire RSVP
     public function showForm()

@@ -44,11 +44,21 @@ class Router
                 $controller->index($method);
                 break;
 
+            case 'rsvp/submit':
+                $controller = new RSVPController();
+                $controller->submitForm($method);
+                break;
+
             case 'deroule':
                 $controller = new DerouleController();
                 $controller->index();
                 break;
 
+            case 'admin':
+                $controller = new \App\Controller\AdminController();
+                $controller->index();
+                break;
+            
             default:
                 http_response_code(404);
                 echo $this->twig->render('404.twig', [
