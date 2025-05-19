@@ -69,10 +69,12 @@ class Router
             if ($method == 'GET') {
                 $controller->showFAQModeration();
             } else {
-                $controller->validateFAQ($_GET);
+                $controller->handleFAQ($_GET);
             }
             break;
-
+        case 'admin/faq/add':
+            $controller = new \App\Controller\AdminController();
+            $controller->addNewQuestion($_POST);
         default:  
             http_response_code(response_code: 404);
             echo $this->twig->render('404.twig', [

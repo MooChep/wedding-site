@@ -20,7 +20,7 @@ class FAQController {
     public function index()
     {
         $faqModel = new FAQ();
-        $questions = $faqModel->getVisibleQuestions();
+        $questions = $faqModel->getQuestions();
 
         echo $this->twig->render('faq.twig', [
             'questions' => $questions,

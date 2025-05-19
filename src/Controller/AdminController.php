@@ -37,21 +37,56 @@ class AdminController
     public function showFAQModeration(): void
     {
         $faqModel = new FAQ();
+        $validated = $faqModel->getQuestions();
         $pending = $faqModel->getPendingQuestions();
+        $refused = $faqModel->getQuestions("0");
 
         echo $this->twig->render(name: 'admin/faq_admin.twig', context: [
-            'questions' => $pending,
+            'validated' => $validated,
+            'pending' => $pending,
+            'refused' => $refused,
             'title' => 'Modération FAQ'
         ]);
     }
 
-    public function validateFAQ(array $get): never
+    public function handleFAQ(array $get): never
     {
-        $id = $get["validate"] ?? NULL;
         $faqModel = new FAQ();
-        $faqModel->setVisible(id: $id, visible: true);
+        foreach ($_GET as $key => $value) {
+            switch ($key) {
+                case 'validate':
+                    // Exemple : valider la question ID $value
+                    $id = $get["validate"] ?? NULL;
+                    $faqModel->setVisible(id: $id, visible: true);
+                    break;
+                case 'delete':
+                    $id = $get['delete'] ?? NULL;
+                    $faqModel->deleteQuestions(id: $id);
+                    break;
+                case 'mask':
+                    $id = $get["mask"] ?? NULL;
+                    $faqModel->setVisible(id: $id, visible: false);
+                        break;
+                default:
+
+                break;
+            }
+        }
+        
 
         header(header: 'Location: /admin/faq');
         exit;
+    }
+    public function handleFaqEdit(array $get): never
+    {
+
+    }
+    public function addNewQuestion(array $post)
+    {
+        $data = array_merge($post, ["visible"=> "0"]);
+        $faqModel = new FAQ();
+        $faqModel->addQuestion($data);
+        header(header: 'Location: /admin/faq');
+exit;
     }
 }

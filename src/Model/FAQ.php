@@ -11,10 +11,11 @@ class FAQ {
         $this->pdo = Database::getConnection();
     }
 
-    public function getVisibleQuestions()
+    public function getQuestions(string $visible = "1")
     {
-        $stmt = $this->pdo->prepare("SELECT nom, question FROM faq WHERE visible = 1 ORDER BY id DESC");
-        $stmt->execute();
+        $stmt = $this->pdo->prepare("SELECT id, nom, email, question FROM faq WHERE visible = :v  ORDER BY id DESC");
+        $stmt->execute(['v' => $visible]);
+
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
@@ -31,4 +32,15 @@ class FAQ {
         $stmt->execute(['v' => $visible ? 1 : 0, 'id' => $id]);
     }
 
+    public function deleteQuestions($id)
+    {
+        $stmt = $this->pdo->prepare('DELETE FROM faq WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+    }
+
+    public function addQuestion(array $data)
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO faq (nom, email, question, visible) VALUES (:nom, :email, :question, :visible)');
+        $stmt->execute($data);
+    }
 }
