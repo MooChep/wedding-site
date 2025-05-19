@@ -56,10 +56,9 @@ public function index()
 {
     $nom = $postData['nom'];
     $prenom = $postData['prenom'];
-    $presence = intval($postData['presence']);
+    $presence = isset($postData['presence']) ? intval($postData['presence']) : null;
     $musique = $postData['musique'] ?? null;
     $accompagnants = $postData['accompagnants'] ?? [];
-
     $id_rsvp = $this->personneModel->insertRSVP();
 
     $id_personne = $this->personneModel->insertPersonne($nom, $prenom, $presence, $id_rsvp);

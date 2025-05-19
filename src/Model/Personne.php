@@ -37,12 +37,21 @@ class Personne
     return $this->pdo->lastInsertId();
 }
 
-    public function insertPersonne(string $nom, string $prenom, int $id_presence, int $id_rsvp): int
+public function insertPersonne($nom, $prenom, $id_presence, $id_rsvp)
 {
-    $stmt = $this->pdo->prepare("INSERT INTO personne (nom, prenom, id_presence, id_rsvp) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$nom, $prenom, $id_presence, $id_rsvp]);
+    $query = "INSERT INTO personne (nom, prenom, id_presence, id_rsvp) 
+              VALUES (:nom, :prenom, :presence, :rsvp)";
+    
+    $stmt = $this->pdo->prepare($query);
+    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':prenom', $prenom);
+    $stmt->bindParam(':presence', $id_presence);
+    $stmt->bindParam(':rsvp', $id_rsvp);
+    $stmt->execute();
+
     return $this->pdo->lastInsertId();
 }
+
 
     public function insertMusique(string $nom, int $id_personne): void
 {

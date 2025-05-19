@@ -37,13 +37,17 @@
     <div class="col-12">
         <label class="form-label">Quand serez-vous parmi nous ?</label>
         <select name="presence" class="form-select" style="width: 55vw" required>
-            <option value="" disabled selected>Choisissez une option</option>
+            <option value="" {% if presence is not defined %}selected{% endif %} disabled hidden>Choisissez une option</option>
             <option value="4">Tout le samedi</option>
             <option value="5">Samedi et dimanche</option>
             <option value="2">Seulement au vin d'honneur</option>
             <option value="3">Seulement au repas</option>
             <option value="1">Impossible d'être parmi vous</option>
         </select>
+        {% if presence is defined and presence == '' %}
+    <div class="text-danger">⚠️ Veuillez sélectionner une option de présence.</div>
+{% endif %}
+
     </div>
 
     <div class="col-12">
