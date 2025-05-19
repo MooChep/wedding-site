@@ -9,7 +9,7 @@
             <li>
                 <strong>{{ q.nom }}</strong> ({{ q.email }})<br>
                 {{ q.question }}
-                <form method="POST" action="/admin/faq/validate/{{ q.id }}">
+                <form method="POST" action="/admin/faq?validate={{ q.id }}">
                     <button type="submit">Valider</button>
                 </form>
             </li>

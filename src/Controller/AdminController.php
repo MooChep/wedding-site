@@ -45,8 +45,9 @@ class AdminController
         ]);
     }
 
-    public function validateFAQ($id): never
+    public function validateFAQ(array $get): never
     {
+        $id = $get["validate"] ?? NULL;
         $faqModel = new FAQ();
         $faqModel->setVisible(id: $id, visible: true);
 

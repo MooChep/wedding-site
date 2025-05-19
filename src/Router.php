@@ -58,26 +58,23 @@ class Router
             $controller = new FAQController();
             $controller->index();
             break;
-
+            
         case 'admin':
             $controller = new \App\Controller\AdminController();
             $controller->index();
             break;
-
+                
         case 'admin/faq':
             $controller = new \App\Controller\AdminController();
-            $controller->showFAQModeration();
+            if ($method == 'GET') {
+                $controller->showFAQModeration();
+            } else {
+                $controller->validateFAQ($_GET);
+            }
             break;
 
-        default:
-            // // Validation question FAQ : admin/faq/validate/ID (en POST)
-            // if ($method === 'POST' && preg_match('#^admin/faq/validate/(\d+)$#', $uri, $matches)) {
-            //     $controller = new \App\Controller\AdminController();
-            //     $controller->validateFAQ($matches[1]);
-            //     break;
-            // }
-
-            http_response_code(404);
+        default:  
+            http_response_code(response_code: 404);
             echo $this->twig->render('404.twig', [
                 'title' => 'Page introuvable',
                 'message' => "La page « $uri » n'existe pas."
