@@ -1,0 +1,40 @@
+
+Table "personne" {
+  "id_personne" INT [pk, not null, increment]
+  "nom" VARCHAR(100) [not null]
+  "prenom" VARCHAR(100) [not null] 
+  "id_presence" INT [not null]
+  "id_rsvp" INT [not null]
+}
+Table "musique" {
+  "id_musique" INT [pk, not null, increment]
+  "nom" VARCHAR(100) [not null]
+  "id_personne" VARCHAR(100) [not null] 
+}
+
+Table "RSVP" {
+  "id_rsvp" INT [pk, increment, not null]
+  "date_rsvp" timestamp 
+}
+
+Table "presence" {
+  "id_presence" INT [pk, increment, not null]
+  "desc" VARCHAR(100)
+}
+
+Table "faq" {
+  "id_faq" INT [pk, increment]
+  "nom" VARCHAR(100)
+  "prenom" VARCHAR(100) [not null]
+  "email" VARCHAR(60) [not null]
+  "question" TEXT [not null]
+}
+
+Ref: "personne"."id_personne" < "musique"."id_personne"
+
+Ref: "presence"."id_presence" < "personne"."id_presence"
+
+
+
+Ref: "RSVP"."id_rsvp" < "personne"."id_rsvp"
+

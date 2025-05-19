@@ -15,12 +15,11 @@ class Router
         $this->twig = new Environment($loader);
     }
 
-    public function handleRequest(string $uri)
+    public function handleRequest(): void
 {
     $method = $_SERVER['REQUEST_METHOD'];
-    $parsed_uri = str_replace("/", "",$uri);
-    var_dump("uri: $parsed_uri");
-    switch ($parsed_uri) {
+    $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    switch ($uri) {
         case '':
         case 'home':
             echo $this->twig->render('home.twig', [
@@ -52,11 +51,10 @@ class Router
             break;
 
         default:
-            // http_response_code(404);
-            // echo $this->twig->render('404.twig', [
-            //     'title' => 'Page introuvable'
-            // ]);
-            echo $uri;
+            http_response_code(404);
+            echo $this->twig->render('404.twig', [
+                'title' => 'Page introuvable'
+            ]);
     }
 }
 
