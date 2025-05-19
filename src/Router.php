@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Controller\HomeController;
-use App\Controller\ContactController;
+use App\Controller\RSVPController;
 use App\Controller\DerouleController;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -39,8 +39,8 @@ class Router
                 $controller->index();
                 break;
 
-            case 'contact':
-                $controller = new ContactController();
+            case 'rsvp':
+                $controller = new RSVPController();
                 $controller->index($method);
                 break;
 

@@ -3,7 +3,7 @@ namespace App\Model;
 
 use PDO;
 
-class RSVP
+class Presence
 {
     private PDO $pdo;
 
@@ -13,10 +13,9 @@ class RSVP
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function create(): int
+    public function findAll(): array
     {
-        $stmt = $this->pdo->prepare("INSERT INTO RSVP (date_rsvp) VALUES (NOW())");
-        $stmt->execute();
-        return $this->pdo->lastInsertId(); // pour relier à une personne ensuite
+        $stmt = $this->pdo->query("SELECT * FROM presence");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

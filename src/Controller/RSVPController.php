@@ -1,30 +1,73 @@
 <?php
-
 namespace App\Controller;
 
+use App\Model\Personne;
+use App\Model\RSVP;
+use App\Model\Presence;
+use App\Model\Musique;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class ContactController
+class RSVPController
 {
     private Environment $twig;
+    private Personne $personneModel;
+    private RSVP $rsvpModel;
+    private Presence $presenceModel;
+    private Musique $musiqueModel;
 
     public function __construct()
     {
         $loader = new FilesystemLoader(__DIR__ . '/../../templates');
         $this->twig = new Environment($loader);
+
+        $this->personneModel = new Personne();
+        $this->rsvpModel = new RSVP();
+        $this->presenceModel = new Presence();
+        $this->musiqueModel = new Musique();
     }
 
-    public function index(string $method)
+    public function index()
     {
-        $data = ['title' => 'Contact'];
-
-        if ($method === 'POST') {
-            $nom = $_POST['nom'] ?? '';
-            $message = $_POST['message'] ?? '';
-            $data['success'] = "Merci $nom, ton message a été reçu !";
-        }
-
-        echo $this->twig->render('contact.twig', $data);
+        $this->showForm();
     }
+
+    // Affichage du formulaire RSVP
+    public function showForm()
+    {
+        $personnes = $this->personneModel->findAll();
+        $presences = $this->presenceModel->findAll();
+
+        echo $this->twig->render('rsvp.twig', [
+            'title' => 'RSVP',
+            'personnes' => $personnes,
+            'presences' => $presences
+        ]);
+    }
+
+    // Traitement du formulaire de soumission RSVP
+    public function submitForm(array $postData)
+{
+    $nom = $postData['nom'];
+    $prenom = $postData['prenom'];
+    $presence = intval($postData['presence']);
+    $musique = $postData['musique'] ?? null;
+    $accompagnants = $postData['accompagnants'] ?? [];
+
+    $id_rsvp = $this->personneModel->insertRSVP();
+
+    $id_personne = $this->personneModel->insertPersonne($nom, $prenom, $presence, $id_rsvp);
+
+    foreach ($accompagnants as $acc) {
+        if (!empty($acc['nom']) && !empty($acc['prenom'])) {
+            $this->personneModel->insertPersonne($acc['nom'], $acc['prenom'], $presence, $id_rsvp);
+        }
+    }
+
+    if (!empty($musique)) {
+        $this->personneModel->insertMusique($musique, $id_personne);
+    }
+
+    echo $this->twig->render('rsvp.twig', ['success' => 'Merci, votre réponse a été enregistrée !']);
+}
 }
