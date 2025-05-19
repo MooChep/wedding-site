@@ -2,8 +2,11 @@
 
 namespace App;
 
-use Twig\Loader\FilesystemLoader;
+use App\Controller\HomeController;
+use App\Controller\ContactController;
+use App\Controller\DerouleController;
 use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class Router
 {
@@ -15,47 +18,44 @@ class Router
         $this->twig = new Environment($loader);
     }
 
-    public function handleRequest(): void
-{
-    $method = $_SERVER['REQUEST_METHOD'];
-    $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-    switch ($uri) {
-        case '':
-        case 'home':
-            echo $this->twig->render('home.twig', [
-                'title' => 'Accueil',
-                'message' => 'Bienvenue sur mon site avec Twig !'
-            ]);
-            break;
+    public function handleRequest(string $uri)
+    {
+        $method = $_SERVER['REQUEST_METHOD'];
 
-        case 'contact':
-            $data = ['title' => 'Contact'];
+        // Détecte le sous-dossier si tu es dans /wedding
+        $basePath = '/wedding';
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-            if ($method === 'POST') {
-                // traitement du formulaire (simple affichage ici)
-                $nom = $_POST['nom'] ?? '';
-                $email = $_POST['email'] ?? '';
-                $message = $_POST['message'] ?? '';
+        if (strpos($uri, $basePath) === 0) {
+            $uri = substr($uri, strlen($basePath));
+        }
 
-                // Tu pourrais stocker ça en BDD ou envoyer un mail ici
-                $data['success'] = "Merci $nom, ton message a bien été envoyé !";
-            }
+        $uri = trim($uri, '/');
 
-            echo $this->twig->render('contact.twig', $data);
-            break;
+        switch ($uri) {
+            case '':
+            case 'home':
+                $controller = new HomeController();
+                $controller->index();
+                break;
 
-        case 'deroule':
-            echo $this->twig->render('deroule.twig', [
-                'title' => 'Déroulé'
-            ]);
-            break;
+            case 'contact':
+                $controller = new ContactController();
+                $controller->index($method);
+                break;
 
-        default:
-            http_response_code(404);
-            echo $this->twig->render('404.twig', [
-                'title' => 'Page introuvable'
-            ]);
+            case 'deroule':
+                $controller = new DerouleController();
+                $controller->index();
+                break;
+
+            default:
+                http_response_code(404);
+                echo $this->twig->render('404.twig', [
+                    'title' => 'Page introuvable',
+                    'message' => "La page « $uri » n'existe pas."
+                ]);
+                break;
+        }
     }
-}
-
 }

@@ -2,7 +2,8 @@
     "name": "ilanh/wedding",
     "autoload": {
         "psr-4": {
-            "Ilanh\\Wedding\\": "src/"
+            "Ilanh\\Wedding\\": "src/",
+            "App\\": "src/"
         }
     },
     "authors": [

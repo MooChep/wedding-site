@@ -1,4 +1,8 @@
-<?php include("includes/header.php") ?>
+{% extends 'layout.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
 
 <section class="timeline container py-5 text-center">
   <h1 class="text-danger mb-5">Le programme du week-end !</h1>
@@ -74,4 +78,4 @@
   </div>
 </section>
 
-<?php include("includes/footer.php") ?>
+{% endblock %}
