@@ -62,6 +62,9 @@ class Router
         case 'admin':
             $controller = new \App\Controller\AdminController();
             $controller->index();
+        case 'admin/rsvp':
+            $controller = new \App\Controller\AdminController();
+            $controller->showRsvpStatus();
             break;
                 
         case 'admin/faq':

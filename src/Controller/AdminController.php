@@ -22,14 +22,17 @@ class AdminController
         // Connexion à la BDD via Database.php
         $this->pdo = Database::getConnection();
     }
-
     public function index(): void
+    {
+        echo $this->twig->render(name: 'admin/admin.twig');
+    }
+    public function showRsvpStatus(): void
     {
         $pdo = Database::getConnection();
         $personneModel = new Personne(pdo: $pdo); // ← IMPORTANT
         $personnes = $personneModel->getAllWithDetails();
 
-        echo $this->twig->render(name: 'admin/admin.twig', context: [
+        echo $this->twig->render(name: 'admin/admin_rsvp.twig', context: [
             'personnes' => $personnes
         ]);
     }
@@ -47,6 +50,7 @@ class AdminController
             'refused' => $refused,
             'title' => 'Modération FAQ'
         ]);
+        header(header: 'Location: /admin');
     }
 
     public function handleFAQ(array $get): never
@@ -74,7 +78,7 @@ class AdminController
         }
         
 
-        header(header: 'Location: /admin/faq');
+        header(header: 'Location: /admin');
         exit;
     }
     // public function handleFaqEdit(array $get): never

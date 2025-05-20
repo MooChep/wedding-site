@@ -2,7 +2,7 @@
 
 - [x] Concevoir la page RSVP/contact avec formulaire
 
-- [ ] Intégrer une page FAQ dynamique
+- [x] Intégrer une page FAQ dynamique
 
 - [x] Installer et configurer la base de données
 

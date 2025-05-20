@@ -1,0 +1,35 @@
+{% extends '/admin/admin_layout.twig' %}
+
+
+{% block title %}Liste des invités{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Liste des réponses RSVP 📋</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Présence</th>
+            <th>Musique</th>
+            <th>Date RSVP</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for personne in personnes %}
+            <tr>
+                <td>{{ personne.prenom }}</td>
+                <td>{{ personne.nom }}</td>
+                <td>{{ personne.presence }}</td>
+                <td>{{ personne.musique ?? '—' }}</td>
+                <td>{{ personne.date_rsvp|date("d/m/Y H:i") }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center">Aucune réponse pour le moment.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
