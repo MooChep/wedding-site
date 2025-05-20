@@ -4,35 +4,40 @@
 <h1>Modération FAQ</h1>
 
 {% if pending %}
+<div class="container mb-3">
     <ul class="admin-faq-list">
         {% for q in pending %}
             <li>
                 <strong>{{ q.nom }}</strong> ({{ q.email }})<br>
                 {{ q.question }}
                 <form method="POST" action="/admin/faq?validate={{ q.id }}">
-                    <button type="submit">Valider</button>
+                    <button type="submit" class="form-control m-3">Valider</button>
                     
                 </form>
                 <form method="POST" action="/admin/faq?delete={{ q.id }}">
-                    <button type="submit">Supprimer</button>
+                    <button type="submit" class="form-control m-3">Supprimer</button>
                     
                 </form>
             </li>
         {% endfor %}
     </ul>
+    </div>
 {% else %}
     <p>Aucune question en attente.</p>
 {% endif %}
 {% if validated %}
+<div class="container mb-3">
+
     <ul class="admin-faq-list">
         {% for q in validated %}
             <li>
                 <strong>{{ q.nom }}</strong> ({{ q.email }})<br>
                 {{ q.question }}
                 <form method="POST" action="/admin/faq?mask={{ q.id }}">
-                    <button type="submit">Masquer</button>
+                    <button type="submit"class="form-control m-3">Masquer</button>
                 </form>
             </li>
+</div>
         {% endfor %}
     </ul>
 {% else %}

@@ -77,16 +77,16 @@ class AdminController
         header(header: 'Location: /admin/faq');
         exit;
     }
-    public function handleFaqEdit(array $get): never
-    {
+    // public function handleFaqEdit(array $get): never
+    // {
 
-    }
+    // }
     public function addNewQuestion(array $post)
     {
         $data = array_merge($post, ["visible"=> "0"]);
         $faqModel = new FAQ();
         $faqModel->addQuestion($data);
-        header(header: 'Location: /admin/faq');
+        header(header: 'Location: /faq');
 exit;
     }
 }
