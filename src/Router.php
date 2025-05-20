@@ -6,6 +6,8 @@ use App\Controller\HomeController;
 use App\Controller\RSVPController;
 use App\Controller\DerouleController;
 use App\Controller\FAQController;
+use App\Controller\AdminController;
+use App\Controller\LoginController;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -60,24 +62,44 @@ class Router
             break;
             
         case 'admin':
-            $controller = new \App\Controller\AdminController();
+            $controller = new AdminController();
             $controller->index();
+            break;
+
         case 'admin/rsvp':
-            $controller = new \App\Controller\AdminController();
+            $controller = new AdminController();
             $controller->showRsvpStatus();
             break;
                 
         case 'admin/faq':
-            $controller = new \App\Controller\AdminController();
+            $controller = new AdminController();
             if ($method == 'GET') {
                 $controller->showFAQModeration();
             } else {
                 $controller->handleFAQ($_GET);
             }
             break;
-        case 'admin/faq/add':
-            $controller = new \App\Controller\AdminController();
+
+        case 'faq/add':
+            $controller = new FAQController();
             $controller->addNewQuestion($_POST);
+            break;
+
+        case 'login':
+            $controller = new LoginController();
+            if ($method === 'POST') {
+                $controller->login($_POST);
+            } else {
+                $controller->showLoginForm();
+            }
+            break;
+
+        case 'logout':
+            $controller = new LoginController();
+            $controller->logout();
+            break;
+
+
         default:  
             http_response_code(response_code: 404);
             echo $this->twig->render('404.twig', [

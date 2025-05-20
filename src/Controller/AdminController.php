@@ -14,8 +14,21 @@ class AdminController
     private Environment $twig;
     private PDO $pdo;
 
+    private function requireAdmin(): void
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (empty($_SESSION['is_admin'])) {
+            header('Location: /login');
+            exit;
+        }
+    }
+
     public function __construct()
     {
+        $this->requireAdmin();
         $loader = new FilesystemLoader(__DIR__ . '/../../templates');
         $this->twig = new Environment($loader);
 
@@ -24,10 +37,12 @@ class AdminController
     }
     public function index(): void
     {
+        $this->requireAdmin();
         echo $this->twig->render(name: 'admin/admin.twig');
     }
     public function showRsvpStatus(): void
     {
+        $this->requireAdmin();
         $pdo = Database::getConnection();
         $personneModel = new Personne(pdo: $pdo); // ← IMPORTANT
         $personnes = $personneModel->getAllWithDetails();
@@ -39,22 +54,25 @@ class AdminController
 
     public function showFAQModeration(): void
     {
+        $this->requireAdmin();
+
         $faqModel = new FAQ();
         $validated = $faqModel->getQuestions();
         $pending = $faqModel->getPendingQuestions();
         $refused = $faqModel->getQuestions("0");
 
-        echo $this->twig->render(name: 'admin/faq_admin.twig', context: [
+        echo $this->twig->render(name: 'admin/admin_faq.twig', context: [
             'validated' => $validated,
             'pending' => $pending,
             'refused' => $refused,
             'title' => 'Modération FAQ'
         ]);
-        header(header: 'Location: /admin');
     }
 
     public function handleFAQ(array $get): never
     {
+        $this->requireAdmin();
+
         $faqModel = new FAQ();
         foreach ($_GET as $key => $value) {
             switch ($key) {
@@ -70,27 +88,14 @@ class AdminController
                 case 'mask':
                     $id = $get["mask"] ?? NULL;
                     $faqModel->setVisible(id: $id, visible: false);
-                        break;
+                    break;
                 default:
 
-                break;
+                    break;
             }
         }
         
-
-        header(header: 'Location: /admin');
         exit;
     }
-    // public function handleFaqEdit(array $get): never
-    // {
 
-    // }
-    public function addNewQuestion(array $post)
-    {
-        $data = array_merge($post, ["visible"=> "0"]);
-        $faqModel = new FAQ();
-        $faqModel->addQuestion($data);
-        header(header: 'Location: /faq');
-exit;
-    }
 }

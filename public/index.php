@@ -9,5 +9,10 @@ use App\Router;
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
 $twig = new \Twig\Environment($loader);
 
-$router = new Router($twig);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$twig->addGlobal('session', $_SESSION);
+
+$router = new Router();
 $router->handleRequest($_SERVER['REQUEST_URI']);

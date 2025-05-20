@@ -12,7 +12,7 @@
     <body>
         
         <div class="container py-5 " style="max-width: 60vw">
-            <nav class="class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"">
+            <nav class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <div class='nav nav-pills' style='margin-bottom: 2em'>
                     <a class="nav-link " href="/home">Accueil</a>
                     <a class="nav-link" href="/deroule">Déroulé</a>
@@ -21,6 +21,11 @@
                     <a class="nav-link " href="/admin">Admin</a>
                     <a class="nav-link " href="/admin/rsvp">Admin RSVP</a>
                     <a class="nav-link " href="/admin/faq">Admin FAQ</a>
+                    {% if session.is_admin %}
+    <a href="/logout" class="nav-link text-danger">Déconnexion</a>
+{% endif %}
+
+
                 </div>
             </nav>
     </div>

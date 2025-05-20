@@ -27,4 +27,18 @@ class FAQController {
             'title' => 'Questions fréquentes'
         ]);
     }
+
+        // public function handleFaqEdit(array $get): never
+    // {
+
+    // }
+    public function addNewQuestion(array $post)
+    {
+        
+        $data = array_merge($post, ["visible"=> "0"]);
+        $faqModel = new FAQ();
+        $faqModel->addQuestion($data);
+        header(header: 'Location: /faq');
+exit;
+    }
 }

@@ -1,4 +1,4 @@
-
+drop database wedding_db;
 CREATE DATABASE IF NOT EXISTS wedding_db;
 USE wedding_db;
 CREATE TABLE IF NOT EXISTS `personne` (
@@ -26,13 +26,14 @@ CREATE TABLE IF NOT EXISTS `presence` (
 );
 
 CREATE TABLE IF NOT EXISTS `faq` (
-  `id_faq` INT PRIMARY KEY AUTO_INCREMENT,
-  `nom` VARCHAR(100),
-  `prenom` VARCHAR(100),
-  `email` VARCHAR(60) NOT NULL,
-  `question` TEXT NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100),
+    email VARCHAR(150),
+    question TEXT NOT NULL,
+    reponse TEXT DEFAULT NULL,
+    visible BOOLEAN DEFAULT FALSE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
 ALTER TABLE `musique` ADD FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`);
 
 ALTER TABLE `personne` ADD FOREIGN KEY (`id_presence`) REFERENCES `presence` (`id_presence`);
