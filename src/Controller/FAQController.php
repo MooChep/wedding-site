@@ -17,7 +17,7 @@ class FAQController {
     }
 
 
-    public function index()
+    public function index(): void
     {
         $faqModel = new FAQ();
         $questions = $faqModel->getQuestions();
