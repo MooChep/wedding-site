@@ -1,28 +1,32 @@
-drop database wedding_db;
-CREATE DATABASE IF NOT EXISTS wedding_db;
+DROP DATABASE IF EXISTS wedding_db;
+CREATE DATABASE wedding_db;
 USE wedding_db;
-CREATE TABLE IF NOT EXISTS `personne` (
-  `id_personne` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `nom` VARCHAR(100) NOT NULL,
-  `prenom` VARCHAR(100) NOT NULL,
-  `id_presence` INT NOT NULL,
-  `id_rsvp` INT NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS `musique` (
-  `id_musique` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `nom` VARCHAR(100) NOT NULL,
-  `id_personne` VARCHAR(100) NOT NULL
-);
 
 CREATE TABLE IF NOT EXISTS `RSVP` (
   `id_rsvp` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `date_rsvp` timestamp
+  `date_rsvp` TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS `presence` (
   `id_presence` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `desc` VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS `personne` (
+  `id_personne` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(100) NOT NULL,
+  `prenom` VARCHAR(100) NOT NULL,
+  `id_presence` INT NOT NULL,
+  `id_rsvp` INT NOT NULL,
+  FOREIGN KEY (`id_presence`) REFERENCES `presence` (`id_presence`),
+  FOREIGN KEY (`id_rsvp`) REFERENCES `RSVP` (`id_rsvp`)
+);
+
+CREATE TABLE IF NOT EXISTS `musique` (
+  `id_musique` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(100) NOT NULL,
+  `id_personne` INT NOT NULL,
+  FOREIGN KEY (`id_personne`) REFERENCES `personne`(`id_personne`)
 );
 
 CREATE TABLE IF NOT EXISTS `faq` (
@@ -34,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
     visible BOOLEAN DEFAULT FALSE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
 ALTER TABLE `musique` ADD FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`);
 
 ALTER TABLE `personne` ADD FOREIGN KEY (`id_presence`) REFERENCES `presence` (`id_presence`);

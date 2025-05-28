@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Database;
 use PDO;
 
 class RSVP
@@ -9,14 +10,13 @@ class RSVP
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=wedding_db;charset=utf8', 'root', '');
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo = Database::getConnection(); 
     }
 
     public function create(): int
     {
         $stmt = $this->pdo->prepare("INSERT INTO RSVP (date_rsvp) VALUES (NOW())");
         $stmt->execute();
-        return $this->pdo->lastInsertId(); // pour relier à une personne ensuite
+        return $this->pdo->lastInsertId();
     }
 }

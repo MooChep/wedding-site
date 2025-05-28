@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Database;
 use PDO;
 
 class Presence
@@ -9,8 +10,7 @@ class Presence
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=wedding_db;charset=utf8', 'root', '');
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo = Database::getConnection();     
     }
 
     public function findAll(): array
