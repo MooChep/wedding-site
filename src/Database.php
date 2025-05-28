@@ -14,7 +14,7 @@ class Database
             $host = 'localhost';  // adapte si besoin
             $db   = 'wedding_db';
             $user = 'root';       // adapte si besoin
-            $pass = '';           // adapte si besoin
+            $pass = 'root';           // adapte si besoin
             $charset = 'utf8mb4';
 
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
