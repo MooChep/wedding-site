@@ -16,9 +16,6 @@ class AdminController
 
     private function requireAdmin(): void
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
 
         if (empty($_SESSION['is_admin'])) {
             header('Location: /login');

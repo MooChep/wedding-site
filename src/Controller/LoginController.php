@@ -14,7 +14,6 @@ class LoginController
 
     public function __construct()
     {
-        session_start();
         $loader = new FilesystemLoader(__DIR__ . '/../../templates');
         $this->twig = new Environment($loader);
         $this->pdo = Database::getConnection();
