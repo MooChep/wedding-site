@@ -1,3 +1,7 @@
+Création d'un site pour mon mariage avec PHP. Découvert du MVC en utilisant composer et twig.
+
+Projet incomplet
+
 ## Suivi des taches à faire
 
 - [x] Concevoir la page RSVP/contact avec formulaire
